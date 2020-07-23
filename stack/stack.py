@@ -17,10 +17,11 @@ return elements in Last In First Out order.
 #         self.storage = []
 
 #     def __len__(self):
-#         return len(self.storage)
+#         return self.size
 
 #     def push(self, value):
 #         self.storage.append(value)
+#         self.size += 1
 
 #     def pop(self):
 #         if not self.storage:
@@ -28,6 +29,7 @@ return elements in Last In First Out order.
 #         else:
 #             value = self.storage[-1]
 #             self.storage.remove(value)
+#             self.size -= 1
 #             return value
 
 # impliment using a linked list as the underlying storage:
@@ -37,10 +39,11 @@ class Stack:
         self.storage = []
 
     def __len__(self):
-        return len(self.storage)
+        return self.size
 
     def push(self, value):
         self.storage.append(value)
+        self.size += 1
 
     def pop(self):
         if not self.storage:
@@ -48,4 +51,5 @@ class Stack:
         else:
             value = self.storage[-1]
             self.storage.remove(value)
+            self.size -= 1
             return value
