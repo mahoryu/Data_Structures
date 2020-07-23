@@ -25,7 +25,7 @@ return elements in Last In First Out order.
 
 #     def pop(self):
 #         if not self.storage:
-#             return
+#             return None
 #         else:
 #             value = self.storage[-1]
 #             self.storage.remove(value)
@@ -33,23 +33,25 @@ return elements in Last In First Out order.
 #             return value
 
 # impliment using a linked list as the underlying storage:
+from singly_linked_list import LinkedList
+
 class Stack:
     def __init__(self):
         self.size = 0
-        self.storage = []
+        self.storage = LinkedList()
 
     def __len__(self):
         return self.size
 
     def push(self, value):
-        self.storage.append(value)
+        self.storage.add_to_tail(value)
         self.size += 1
 
     def pop(self):
-        if not self.storage:
-            return
+        if not self.storage.head:
+            return None
         else:
-            value = self.storage[-1]
-            self.storage.remove(value)
+            value = self.storage.tail.get_value()
+            self.storage.remove_tail()
             self.size -= 1
             return value
