@@ -26,14 +26,32 @@ class LinkedList:
             self.tail.set_next(new_node)
             self.tail = new_node
 
+    def remove_tail(self):
+        if not self.head:
+            return None
+        elif not self.head.get_next():
+            value = self.head.get_value()
+            self.head = None
+            self.tail = None
+            return value
+        else:
+            current = self.head
+            prev = current
+            while current.get_next() != None:
+                prev = current
+                current = current.get_next()
+            self.tail = prev
+            self.tail.set_next(None)
+            return current.get_value()
+
     def remove_head(self):
         if not self.head:
             return None
         elif not self.head.get_next():
-            head = self.head
+            value = self.head.get_value()
             self.head = None
             self.tail = None
-            return head.get_value()
+            return value
         else:
             value = self.head.get_value()
             self.head = self.head.get_next()
