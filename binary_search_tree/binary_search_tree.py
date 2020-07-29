@@ -15,46 +15,54 @@ class BSTNode:
         self.left = None
         self.right = None
 
-class BinarySearchTree():
-    def __init__(self, node=None):
-        self.root = node
-
     # Insert the given value into the tree
     def insert(self, value):
-        new_node = BSTNode(value)
-        if not self.root:
-            self.root = new_node
-            return
-        current = self.root
-        while current:
-            if value < current.value:
-                if not current.left:
-                    current.left = new_node
-                    return
-                else:
-                    current = current.left
-            elif value > current.value:
-                if not current.right:
-                    current.right = new_node
-                    return
-                else:
-                    current = current.right
+        # check whether new node's value is less than current node's value
+        if value < self.value:
+            if not self.left:
+                self.left = BSTNode(value)
             else:
-                return
-        return
+                self.left.insert(value)
+        # check whether new node's value is greater than or equal to curr node's val
+        elif value >= self.value:
+            if not self.right:
+                self.right = BSTNode(value)
+            else:
+                self.right.insert(value)
 
     # Return True if the tree contains the value
     # False if it does not
     def contains(self, target):
-        pass
+        # check whether curr node matches target
+        if self.value == target:
+            return True
+        if target < self.value:
+            if not self.left:
+                return False
+            else:
+                return self.left.contains(target)
+        else:
+            if not self.right:
+                return False
+            else:
+                return self.right.contains(target)
 
     # Return the maximum value found in the tree
     def get_max(self):
-        pass
+        max_val = self.value
+        if self.right:
+            max_val = self.right.get_max()
+        return max_val
 
     # Call the function `fn` on the value of each node
     def for_each(self, fn):
-        pass
+        if not self.value:
+            return None
+        if self.left:
+            self.left.for_each(fn)
+        if self.right:
+            self.right.for_each(fn)
+        self.value = fn(self.value)
 
     # Part 2 -----------------------
 
@@ -91,7 +99,7 @@ class BinarySearchTree():
 """
 This code is necessary for testing the `print` methods
 """
-bst = BinarySearchTree(1)
+bst = BSTNode(1)
 
 bst.insert(8)
 bst.insert(5)
